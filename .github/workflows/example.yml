@@ -22,43 +22,43 @@ jobs:
       - name: Run pytest
         run: pytest
 
-runmigrations:
-    runs-on: ubuntu-latest
+  runmigrations:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with: 
-          python-version: '3.13'
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with: 
+            python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
-      - name: Run django migrate
-        run: python manage.py migrate
+        - name: Run django migrate
+          run: python manage.py migrate
 
-migrations-check:
-    runs-on: ubuntu-latest
+  migrations-check:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with: 
-          python-version: '3.13'
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with: 
+            python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
-      - name: Run makemigrations
-        run: python manage.py makemigrations --check                         
+        - name: Run makemigrations
+          run: python manage.py makemigrations --check                         
       
