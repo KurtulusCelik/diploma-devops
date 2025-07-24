@@ -55,6 +55,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+      attestations: write
+      id-token: write      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,10 +70,10 @@ jobs:
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-actions@v5
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/kurtuluscelik/diploma-devops
-          
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
