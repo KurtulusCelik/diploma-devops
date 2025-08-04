@@ -1,0 +1,38 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/kurtuluscelik/diploma-devops
+  pullPolicy: Always
+  tag: "main"
+
+imagePullSecrets:
+  - name: ghcr-token
+
+
+nameOverride: ""
+fullnameOverride: ""
+
+apiContainerPort: 8000
+
+ingress:
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+loadSecretFrom: books-database-postgresql
+environmentVariables:
+  - name: DATABASE_NAME
+    value: books
+  - name: DATABASE_USER
+    value: books
+  - name: DATABASE_HOST
+    value: books-database-postgresql-0.books-database-postgresql-hl.default.svc.cluster.local
+  - name: DEVELOPMENT_MODE
+    value: "false"

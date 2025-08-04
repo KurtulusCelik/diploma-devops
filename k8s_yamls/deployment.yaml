@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-servers
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       service: nginx-server
@@ -15,3 +15,10 @@ spec:
       containers:
       - image: nginxdemos/hello
         name: nginx-container
+        volumeMounts:
+          - name: pvc-volume
+            mountPath: /cache
+      volumes:
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: my-volume
