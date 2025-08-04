@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/KurtulusCelik/diploma-devops/compare/v1.0.0...v1.1.0) (2025-08-04)
+
+### Features
+
+* argocd added to the project ([7c3390c](https://github.com/KurtulusCelik/diploma-devops/commit/7c3390ca02ba09e0abaf6e18a873729d4627564c))
+
 ## 1.0.0 (2025-08-04)
 
 ### Features
