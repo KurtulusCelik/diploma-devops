@@ -10,7 +10,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,7 +21,6 @@ jobs:
 
   runmigrations:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +32,6 @@ jobs:
 
   migrations-check:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,7 +49,7 @@ jobs:
       - migrations-check
     if: github.ref == 'refs/heads/main'
     outputs:
-      new-release-published: ${{ steps.semantic.outputs.new-release-published }}
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
       new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     permissions:
       contents: write
@@ -77,13 +74,18 @@ jobs:
             @semantic-release/github
             conventional-changelog-conventionalcommits
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Debug semantic outputs
+        run: |
+          echo "Published: ${{ steps.semantic.outputs.new_release_published }}"
+          echo "Version: ${{ steps.semantic.outputs.new_release_version }}"
 
   build-docker-image:
     runs-on: ubuntu-latest
     needs:
-     - semantic-release
-    if: github.ref == 'refs/heads/main' && needs.semantic-release.outputs.new-release-published == 'true'
+      - semantic-release
+    if: github.ref == 'refs/heads/main' && needs.semantic-release.outputs.new_release_published == 'true'
     permissions:
       contents: read
       packages: write
@@ -114,7 +116,7 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.metadata.outputs.labels }}              
+          labels: ${{ steps.meta.outputs.labels }}              
 
   deploy-application:
     runs-on: ubuntu-latest
@@ -130,9 +132,9 @@ jobs:
       - name: Update Image version in values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
-          valueFile: 'envs/prod/values.yaml' # The path to your values file
-          propertyPath: 'image.tag' # The value you want to update
-          value: ${{ needs.semantic-release.outputs.new_release_version }} # new value to overide, taken from semantic-release job
-          branch: main # which branch to push the change to
+          valueFile: 'envs/prod/values.yaml'
+          propertyPath: 'image.tag'
+          value: ${{ needs.semantic-release.outputs.new_release_version }}
+          branch: main
           commitChange: true
-          message: "chore: Deploy Image Version ${{ needs.semantic-release.outputs.new_release_version }} to production [skip ci] "
+          message: "chore: Deploy Image Version ${{ needs.semantic-release.outputs.new_release_version }} to production [skip ci]"
