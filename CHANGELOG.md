@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/KurtulusCelik/diploma-devops/compare/v1.1.0...v1.2.0) (2025-08-08)
+
+### Features
+
+* Adding new very important endpoint ([b2941a5](https://github.com/KurtulusCelik/diploma-devops/commit/b2941a59a213f6b5d8f9679a11aee8a77033ae5f))
+
+### Bug Fixes
+
+* typo in github action workflow ([67763b9](https://github.com/KurtulusCelik/diploma-devops/commit/67763b931ec05d9a530c5b37a7ef6e79b173b494))
+
 ## [1.1.0](https://github.com/KurtulusCelik/diploma-devops/compare/v1.0.0...v1.1.0) (2025-08-04)
 
 ### Features
