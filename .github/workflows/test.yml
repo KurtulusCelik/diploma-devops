@@ -53,7 +53,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     outputs:
       new-release-published: ${{ steps.semantic.outputs.new_release_published }}
-      new-release-version: ${{ steps.semantic.outputs.new_release_version }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     permissions:
       contents: write
       issues: write
@@ -132,7 +132,7 @@ jobs:
         with:
           valueFile: 'envs/prod/values.yaml' # The path to your values file
           propertyPath: 'image.tag' # The value you want to update
-          value: ${{ needs.semantic-release.outputs.new-release-version }} # new value to overide, taken from semantic-release job
+          value: ${{ needs.semantic-release.outputs.new_release_version }} # new value to overide, taken from semantic-release job
           branch: main # which branch to push the change to
           commitChange: true
-          message: "chore: Deploy Image Version ${{ needs.semantic-release.outputs.new-release-version }} to production [skip ci] "
+          message: "chore: Deploy Image Version ${{ needs.semantic-release.outputs.new_release_version }} to production [skip ci] "
