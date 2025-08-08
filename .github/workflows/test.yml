@@ -115,4 +115,24 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}              
-      
+
+  deploy-application:
+    run-on: ubuntu-latest
+    needs:
+      - semantic-release
+      - build-docker-image
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update Image version in values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'envs/prod/values.yaml' # The path to your values file
+          propertyPath: 'image.tag' # The value you want to update
+          value: ${{ needs.semantic-release.outputs.new-release-version }} # new value to overide, taken from semantic-release job
+          branch: main # which branch to push the change to
+          commitChange: true
+          message: "chore: Deploy Image Version ${{ needs.semantic-release.outputs.new-release-version }} to production [skip ci] "

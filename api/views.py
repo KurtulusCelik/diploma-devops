@@ -13,7 +13,17 @@ class HealthView(APIView):
             }
         )
     
-health_view = HealthView.as_view()    
+health_view = HealthView.as_view()
+
+class TestView(APIView):
+    def get(self, request, *args, **kwargs):
+        return Response(
+            {
+                "test": "ok"
+            }
+        )
+    
+test_view = TestView.as_view() 
 
 #/api/books - All methods (GET, POST)
 class BookView(APIView):
