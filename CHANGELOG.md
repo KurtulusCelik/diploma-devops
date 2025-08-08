@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/KurtulusCelik/diploma-devops/compare/v1.2.0...v1.2.1) (2025-08-08)
+
+### Bug Fixes
+
+* typo in github action workflow x2 ([fc7f856](https://github.com/KurtulusCelik/diploma-devops/commit/fc7f856e731f0739a728e456827875b94a2718e1))
+
 ## [1.2.0](https://github.com/KurtulusCelik/diploma-devops/compare/v1.1.0...v1.2.0) (2025-08-08)
 
 ### Features
